@@ -1,3 +1,4 @@
+//tabs
 const tabs = document.querySelectorAll('.tabheader__item')
 const tabsParent = document.querySelector('.tabheader__items')
 const tabContent = document.querySelectorAll('.tabcontent')
@@ -46,7 +47,7 @@ const Slideshow = () => {
 }
 Slideshow()
 
-
+//modal
 const modal = document.querySelector('.modal')
 const modalTrigger = document.querySelector('.btn_white')
 const closeModalBtn = document.querySelector('.modal__close')
@@ -80,3 +81,77 @@ const openModalScroll = () => {
 }
 window.addEventListener('scroll',openModalScroll)
 const modalTimeout = setTimeout(openModal, 40000)
+
+//data
+
+ const deadline = '2023-02-25'
+
+function getTimerRemaining(deadline) {
+    const t = new Date(deadline) - new Date(),
+        days = Math.floor((t / (1000 * 60 * 60 * 24))),
+        hours = Math.floor((t / (1000 * 60 * 60) % 24)),
+        minutes = Math.floor((t / 1000 / 60) % 60),
+        seconds = Math.floor((t / 1000) % 60)
+
+    return {
+        "total": t,
+        "days": days,
+        "hours": hours,
+        "minutes": minutes,
+        "seconds": seconds,
+    }
+}
+
+function setClock(element, deadline){
+    const elem = document.querySelector(element)
+    days = elem.querySelector('#days')
+    hours = elem.querySelector('#hours')
+    minutes = elem.querySelector('#minutes')
+    seconds = elem.querySelector('#seconds')
+
+    setInterval(updateClock, 1000)
+
+    updateClock()
+
+    function makeZero(num) {
+        if(num > 0 && num < 10) {
+            return `0${num}`
+        }else {
+            return num
+        }
+    }
+
+    function updateClock() {
+        const t = getTimerRemaining(deadline)
+        days.innerHTML = makeZero(t.days)
+        hours.innerHTML = makeZero(t.hours)
+        minutes.innerHTML = makeZero(t.minutes)
+        seconds.innerHTML = makeZero(t.seconds)
+    }
+}
+
+
+setClock('.timer', deadline)
+
+
+
+
+
+
+// post data
+// const forms = document.querySelectorAll('form')
+
+// const postData = (form) => {
+    // form.addEventListener('submit', (e) => {
+//         e.preventDefault()
+
+//         const request = new XMLHttpRequest()
+//         request.open("POST","server.php")
+//         request.setRequestHeader("Content-type", "application/json")
+
+//         const formData = new FormData(forms[0])
+//         const object = {}
+
+//         formData.forEach()
+//     })
+// }
